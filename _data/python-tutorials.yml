@@ -1,0 +1,8 @@
+- name: Introduction
+  url: introduction
+- name: Variables and Built-in Functions
+  url: variables-and-built-in-functions
+- name: If Statements and While Loops
+  url: if-and-while
+- name: Lists and For Loops
+  url: lists-and-for
