@@ -21,6 +21,11 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 
 github_username:  bls-cs
+defaults:
+ - scope:
+         path: "assets/img"
+   values:
+           image: true
 
 # Build settings
 markdown: kramdown
@@ -42,4 +47,4 @@ plugins:
 
 header_pages:
         - index.md
-        - python.md
+        - python/index.md
