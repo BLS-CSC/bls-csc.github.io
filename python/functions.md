@@ -134,6 +134,23 @@ print(n)            # prints 12
 print(sum(sum(3, 6), 1))    # prints 10
 ```
 
+A more complex example:
+```
+def tri_area(s1, s2, s3):   # Using Heron's formula
+    s = (s1 + s2 + s3) / 2
+    return (s * (s - s1) * (s - s2) * (s - s3)) ** 0.5
+
+print(tri_area(3, 4, 5))   # 6.0
+print(tri_area(6, 6, 6))   # 15.588457268119896
+```
+outputs
+```
+6.0
+15.588457268119896
+```
+
+### Multiple Return Values
+
 You can include multiple return statements, although this is only useful with conditionals.
 ```
 def abs_subtract(n1, n2):
@@ -153,7 +170,7 @@ outputs
 ```
 The function `abs_subtract` always returns a value before the print statement runs, always preventing the last line from running.
 
-### A really important note about return and print!
+### Returning is not printing!
 
 Returning and printing are not the same thing. Please do not use them interchangeably.
 
