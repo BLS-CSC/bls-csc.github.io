@@ -6,3 +6,5 @@
   url: if-and-while
 - name: Lists and For Loops
   url: lists-and-for
+- name: Functions
+  url: functions

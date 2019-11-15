@@ -19,3 +19,5 @@ The BLS Comp Sci Club
 
 # Tutorials
  - [Python](python)
+
+Please read up on the [ACSL](acsl) if you're competing.
