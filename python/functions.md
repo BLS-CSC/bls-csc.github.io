@@ -52,7 +52,7 @@ Imagine that something like this happens behind the scenes:
 ```
 name = 'Mia'
 print('Hello', name)
-print('It's nice to meet you.')
+print('Nice to meet you.')
 ```
 
 We can call the function again with different names.
@@ -64,11 +64,11 @@ greet('Thea')
 outputs
 ```
 Hello, Mia
-It's nice to meet you.
+Nice to meet you.
 Hello, Bea
-It's nice to meet you.
+Nice to meet you.
 Hello, Thea
-It's nice to meet you.
+Nice to meet you.
 ```
 
 ## Function Arguments
