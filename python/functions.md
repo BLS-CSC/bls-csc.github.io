@@ -33,10 +33,10 @@ name(arguments)
 Here's an example function:
 ```
 def greet(name):
-    print('Hello,' name)
-    print('It's nice to meet you.')
+    print('Hello', name)
+    print('Nice to meet you.')
 ```
-The function greet accepts one argument, `name`, and runs the next few lines like normal.
+The function `greet` accepts one argument, `name`, and runs the next few lines like normal.
 
 To call this function, you run
 ```
@@ -45,7 +45,7 @@ greet('Mia')
 This will output
 ```
 Hello, Mia
-It's nice to meet you.
+Nice to meet you.
 ```
 
 Imagine that something like this happens behind the scenes:
