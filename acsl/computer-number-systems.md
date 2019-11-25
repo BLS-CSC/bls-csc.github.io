@@ -9,16 +9,18 @@ layout: default
 
 Before we talk about how computer numbers work, we have to talk about how our base-10 numbers work, something you may have forgotten a long time ago.
 
-Take a number like 1531. We can break down this numbers as follows:
+Take a number like 1531. We can break down this number as follows:
 
 $$ 1*10^3 + 5*10^2 + 3*10^1 + 1*10^0 $$
 
 Each digit is simply a weight multiplied by the power of some *base*.
-Since our base is 10, we have 10 digits, from 0-9, and we can represent every integer this way.
+Since our base is 10, we have 10 digits, from 0-9, and we multiply each digit by a power of ten.
+
+This way, we can represent every integer!
 
 ## Base 2
 
-Base 2, or binary, is a system with only two digits: 0 and 1. Each digit is multiplied by a power of two.
+Base 2, or binary, is a system with only two digits: 0 and 1, off and on. Each digit is multiplied by a power of two and added to create a number.
 
 For example, we can convert 27 (in base 10) to a binary number by adding up powers of two.
 
