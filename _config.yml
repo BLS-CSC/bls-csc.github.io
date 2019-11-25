@@ -48,3 +48,4 @@ plugins:
 header_pages:
         - index.md
         - python/index.md
+        - acsl/index.md
