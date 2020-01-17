@@ -39,4 +39,3 @@ Note that the subscript of a number denotes what base it is written in.
 ## Adding
 
 ## Converting between bases
-
