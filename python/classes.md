@@ -173,7 +173,7 @@ def draw():
     ellipse(mary.x, mary.y, 50, 50)
 ```
 
-#### A note about `self`
+### A note about `self`
 
 When we defined the class, we wrote a lot of `self`s. `self`, which must be defined as the first argument of an instance method, refers to the object which called the method. In the constructor, it refers to the object being created. Without `self`, Python would have to guess between creating a local variable, a global variable, and an instance variable. By requiring developers to refer to an object's fields through `self`, Python prevents this conflict.
 
