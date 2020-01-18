@@ -44,13 +44,13 @@ def keyPressed():
     if key == 'd':
         x1 += 5
     
-    if keyCode == UP:
+    if key == 'i':
         y2 -= 5
-    if keyCode == DOWN:
+    if key == 'j':
         y2 += 5
-    if keyCode == LEFT:
+    if key == 'k':
         x2 -= 5
-    if keyCode == RIGHT:
+    if key == 'l':
         x2 += 5
 ```
 
@@ -107,9 +107,9 @@ mary = Player()
 ```
 This line would create another instance of the player class, which has its own `health`, `item`, `x`, and `y`.
 
-A good way to understand instances is with templates. A class is a template for an object with certain characterstics, and objects are the shapes created. The template is always the same, but the circles you draw and cut out of a page are distinct. You can move them independently, fold them differently, and, in general, change their states independetly.
+A good way to understand instances is with templates. A class is a template for an object with certain characteristics, and objects are the shapes created. The template is always the same, but the circles you draw and cut out of a page are distinct. You can move them independently, fold them differently, and, in general, change their states independently.
 
-If we replace all of those messy variables definition with objects, we can shorten our code a litte.
+If we replace all of those messy variables definition with objects, we can shorten our code a little.
 
 Let's start from the ground up.
 
@@ -145,8 +145,6 @@ Let's go ahead and rewrite the `keyPressed` function.
 
 ```
 def keyPressed():
-    global carrie, mary
-    
     if key == 'w':
         carrie.y -= 5
     if key == 's':
@@ -156,13 +154,13 @@ def keyPressed():
     if key == 'd':
         carrie.x += 5
     
-    if keyCode == UP:
+    if key == 'i':
         mary.y -= 5
-    if keyCode == DOWN:
+    if key == 'k':
         mary.y += 5
-    if keyCode == LEFT:
+    if key == 'j':
         mary.x -= 5
-    if keyCode == RIGHT:
+    if key == 'l:
         mary.x += 5
 ```
 
@@ -177,7 +175,7 @@ def draw():
 
 #### A note about `self`
 
-When we defined the class, we wrote a lot of `self`s. `self`, which must be defined as the first argument of an instance method, refers to the object which called the method. In the constructor, it refers to the object being created. Without `self`, Python would have to guess between creating a local variable, a global varible, and an instance variable. By requiring developers to refer to an object's fields through `self`, Python prevents this conflict.
+When we defined the class, we wrote a lot of `self`s. `self`, which must be defined as the first argument of an instance method, refers to the object which called the method. In the constructor, it refers to the object being created. Without `self`, Python would have to guess between creating a local variable, a global variable, and an instance variable. By requiring developers to refer to an object's fields through `self`, Python prevents this conflict.
 
 ## Writing Methods
 
@@ -185,7 +183,7 @@ There's something wrong with our Processing code above. It's longer and more inc
 
 Well, remember when I defined a class, I said that they had both states and behaviors? We already made states. We're going to define a behavior now.
 
-### Creating the `draw_me` mathod
+### Creating the `draw_me` method
 
 Inside our class definition, define another method, called `draw_me`.
 
@@ -237,3 +235,156 @@ def draw_plr(plr):
 In fact, this is standard behavior in C, where classes don't exist, and you can see how it carries over in the use of `self`. However, now imagine that you have another `draw` function for weapons, and another for map tiles. These can get out of hand, and you will write better code if you sort them neatly into their respective classes.
 
 If you want to look at another advantage, check out [Duck typing](//en.wikipedia.org/wiki/Duck_typing) on Wikipedia.
+
+## Writing the move method
+
+If you take a look at our code, it might look something like this.
+
+```
+# Define the class
+
+class Player:
+
+    # Constructor
+    def __init__(self):
+        self.health = 100
+        self.item = None
+        self.x = 0
+        self.y = 0
+
+    def draw_me(self):
+        ellipse(self.x, self.y, 50, 50)
+
+# Create instances of the class (objects)
+
+carrie = Player()
+mary = Player()
+
+# Processing
+
+def setup():
+    size(600, 600)
+
+def draw():
+    clear()
+    carrie.draw_me()
+    mary.draw_me()
+
+# Handle key presses
+
+def keyPressed():
+    if key == 'w':
+        carrie.y -= 5
+    if key == 's':
+        carrie.y += 5
+    if key == 'a':
+        carrie.x -= 5
+    if key == 'd':
+        carrie.x += 5
+    
+    if key == 'i':
+        mary.y -= 5
+    if key == 'k':
+        mary.y += 5
+    if key == 'j':
+        mary.x -= 5
+    if key == 'l:
+        mary.x += 5
+```
+
+Notice where all the redundant code is: `keyPressed()`. Let's write a generalized `move` method to fix that.
+
+As always, we start with a function definition.
+
+```
+def move(self):
+    if key == 'w':
+        carrie.y -= 5
+    if key == 's':
+        carrie.y += 5
+    if key == 'a':
+        carrie.x -= 5
+    if key == 'd':
+        carrie.x += 5
+```
+
+Now, let's generalize this method. First, we'll change occurences of `carrie` to `self`.
+
+```
+def move(self):
+    if key == 'w':
+        self.y -= 5
+    if key == 's':
+        self.y += 5
+    if key == 'a':
+        self.x -= 5
+    if key == 'd':
+        self.x += 5
+```
+
+Now, whatever object calls the move method (either `carrie` or `mary`) will be affected, rather than just `carrie`.
+
+There's one more difference between `carrie`'s and `mary`'s behaviors: the keys pressed. `carrie` uses the WASD keys, whereas `mary` uses the TFGH keys. How do we account for this differences in one method?
+
+### Adding method arguments
+
+Like any other function, methods can take in arguments as input to modify their behavior.
+
+Let's start by generalizing our `if` statements. Instead of writing the strings for individual keys, we can use variables to represent the target key.
+
+```
+def move(self):
+    if key == up_key:
+        self.y -= 5
+    if key == down_key:
+        self.y += 5
+    if key == left_key:
+        self.x -= 5
+    if key == right_key:
+        self.x += 5
+```
+
+Now, we need to define `up_key`, `down_key`, `left_key`, and `right_key` as method parameters.
+
+```
+def move(self, up_key, down_key, left_key, right_key): # Define parameters
+    if key == up_key:
+        self.y -= 5
+    if key == down_key:
+        self.y += 5
+    if key == left_key:
+        self.x -= 5
+    if key == right_key:
+        self.x += 5
+```
+
+Finally, we can replace our previous code with a call to the `move` method. Since the `move` method specifies four parameters for directional keys, we have to pass in four parameters representing directional keys.
+
+```
+# Handle key presses
+
+def keyPressed():
+    carrie.move('w', 's', 'a', 'd')
+    mary.move('i', 'k', 'j', 'l')
+```
+
+Not only is our code a lot shorter, it's also a lot more readable and intuitive. When a key is pressed, we tell `carrie` and `mary` to move. Our code practically annotates itself without losing any functionality.
+
+If we want to add any changes to the behaviors of the key presses, like adjust the speed from 5 to 10, we just have to modify the `move` method in a few places, rather than track down every `if` statement scattered in `keyPressed`.
+
+## Modifying the constructor
+
+TBD
+
+## Challenges
+
+Using the same principle of writing code once and using it multiple times, how could you modify the `move` method so that, to change the speed of the player, you only have to modify a single line of code?
+
+Try to draw carrie and mary with different colors by modifying...
+ * The `draw_me()` method
+ * The constructor
+Which method is better (aka more intuitive)?
+
+Write a method that teleports one of the players when the mouse is clicked.
+
+Write a method which can shoot projectiles.
